@@ -1,0 +1,13 @@
+{
+  "name": "nodejs-trainig",
+  "description": "Node js training app",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap": "~3.2.0",
+    "underscore": "~1.7.0",
+    "backbone": "~1.1.2",
+    "requirejs": "~2.1.15",
+    "requirejs-text": "~2.0.12"
+  }
+}
