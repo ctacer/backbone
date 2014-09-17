@@ -44,7 +44,10 @@ define([
       backendApi.register({
         data: formObject,
         success: function (data) {
-          navi.go('home');
+          if (!data.error) {
+            navi.go('home');
+          }
+          else {}
         }
       });
       return false;

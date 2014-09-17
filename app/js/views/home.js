@@ -10,11 +10,21 @@ define([
 
 ], function ($, _, Backbone, storage, backendApi, navi, homeTemplate) {
 
+  var getUserInfo = function (user) {
+    var list = [];
+    for (var key in user) {
+      if (user.hasOwnProperty(key)) {
+        list.push({ key: key, val: user[key] });
+      }
+    }
+  };
+
   var HomeView = Backbone.View.extend({
     el: '#view',
 
     render: function () {
-      this.$el.html(_.template(homeTemplate) ({ user: storage.getUser() }));
+      var user = storage.getUser();
+      this.$el.html(_.template(homeTemplate) ({ user: user, userInfo: getUserInfo(user) }));
     },
 
     events: {
