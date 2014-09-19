@@ -6,15 +6,16 @@ define([
   'backend-api',
   'storage',
   'navi',
+  'text!templates/nav-bar.html',
   'text!templates/edit-profile.html'
 
-], function ($, _, Backbone, backendApi, storage, navi, editProfileTemplate) {
+], function ($, _, Backbone, backendApi, storage, navi, navBarTemplate, editProfileTemplate) {
 
   var EditProfileView = Backbone.View.extend({
     el: '#view',
 
     render: function () {
-      this.$el.html(_.template(editProfileTemplate) ({ user: storage.getUser() }));
+      this.$el.html(_.template(navBarTemplate + editProfileTemplate) ({ user: storage.getUser() }));
     },
 
     events: {

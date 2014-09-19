@@ -8,20 +8,21 @@ define([
   'views/home',
   'views/login',
   'views/register',
-  'views/edit-profile'
+  'views/edit-profile',
+  'views/search-profile'
 
-], function($, _, Backbone, storage, navi, homeView, loginView, registerView, editProfileView) {
+], function($, _, Backbone, storage, navi, homeView, loginView, registerView, editProfileView, searchProfileView) {
 
   "use strict";
 
   var AppRouter = Backbone.Router.extend({
     routes: {
       '': 'homeAction',
-
+      
       'login': 'loginAction',
       'register': 'registerAction',
       'edit-profile': 'editProfile',
-
+      'search-profile': 'searchProfile',
       'home': 'homeAction',
 
       '*actions': 'homeAction'
@@ -34,37 +35,50 @@ define([
 
     var appRouter = new AppRouter;
 
-    appRouter.on('route:loginAction', function () {
-      user = storage.getUser();
-      if (user) {
-        return navi.go('home');
-      }
-      loginView.render();
-    });
+    _.each({
 
-    appRouter.on('route:registerAction', function () {
-      user = storage.getUser();
-      if (user) {
-        return navi.go('home');
-      }
-      registerView.render();
-    });
+      'route:loginAction': function () {
+        user = storage.getUser();
+        if (user) {
+          return navi.go('home');
+        }
+        loginView.render();
+      },
 
-    appRouter.on('route:homeAction', function (actions) {
+      'route:registerAction': function () {
+        user = storage.getUser();
+        if (user) {
+          return navi.go('home');
+        }
+        registerView.render();
+      },
 
-      user = storage.getUser();
-      if (!user) {
-        return navi.go('login');
-      }
-      homeView.render();
-    });
+      'route:homeAction': function (actions) {
+        user = storage.getUser();
+        if (!user) {
+          return navi.go('login');
+        }
+        homeView.render();
+      },
 
-    appRouter.on('route:editProfile', function () {
-      user = storage.getUser();
-      if (!user) {
-        return navi.go('login');
+      'route:editProfile': function () {
+        user = storage.getUser();
+        if (!user) {
+          return navi.go('login');
+        }
+        editProfileView.render();
+      },
+
+      'route:searchProfile': function () {
+        user = storage.getUser();
+        if (!user) {
+          return navi.go('login');
+        }
+        searchProfileView.render();
       }
-      editProfileView.render();
+
+    }, function (listener, key) {
+      appRouter.on(key, listener);
     });
 
     Backbone.history.start();

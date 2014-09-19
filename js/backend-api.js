@@ -17,10 +17,6 @@ define([ 'jquery' ], function ($) {
 
   api.appendToken = appendToken;
 
-  var customAjax = function (props) {
-
-  };
-
   var ajax = function (props) {
     props.data = appendToken(props.data);
 
@@ -218,7 +214,15 @@ define([ 'jquery' ], function ($) {
    * GET /api/users/search
    * Possible search criteria:  first_name, last_name
    */
-  api.searchUsers = function () {};
+  api.searchUsers = function (props) {
+    ajax({
+      url: '/api/users/search',
+      type: 'GET',
+      data: props.data || {},
+      success: props.success,
+      error: props.error
+    });
+  };
 
   /**
    * SEARCH MESSAGES 
