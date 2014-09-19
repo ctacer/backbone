@@ -23,22 +23,37 @@ define([
 
     submitForm: function (event) {
       var getField = function (name) {
+        return $(event.target).find('input[name="' + name + '"]');
+      };
+
+      var getValue = function (name) {
         return $(event.target).find('input[name="' + name + '"]').val();
       };
 
-      var formObject = {
-        'email' : getField('email'),
-        'password' : getField('password'),
+      var setValue = function (name, value) {
+        $(event.target).find('input[name="' + name + '"]').val(value);
+      };
 
-        'first_name': getField('first_name'),
-        'last_name': getField('last_name'),
-        'birthday': getField('birthday'),
-        'phone': getField('phone'),
-        'address': getField('address'),
-        'image_url': getField('image_url'),
-        'twitter': getField('twitter'),
-        'description': getField('description'),
-        'status': getField('status')
+      if (getValue('password-again') != getValue('password')) {
+        setValue('password-again', '');
+        setValue('password', '');
+        getField('password').focus();
+        return false;
+      }
+
+      var formObject = {
+        'email' : getValue('email'),
+        'password' : getValue('password'),
+
+        'first_name': getValue('first_name'),
+        'last_name': getValue('last_name'),
+        'birthday': getValue('birthday'),
+        'phone': getValue('phone'),
+        'address': getValue('address'),
+        'image_url': getValue('image_url'),
+        'twitter': getValue('twitter'),
+        'description': getValue('description'),
+        'status': getValue('status')
       };
 
       backendApi.register({

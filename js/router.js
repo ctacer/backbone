@@ -7,9 +7,10 @@ define([
   'navi',
   'views/home',
   'views/login',
-  'views/register'
+  'views/register',
+  'views/edit-profile'
 
-], function($, _, Backbone, storage, navi, homeView, loginView, registerView) {
+], function($, _, Backbone, storage, navi, homeView, loginView, registerView, editProfileView) {
 
   "use strict";
 
@@ -19,6 +20,7 @@ define([
 
       'login': 'loginAction',
       'register': 'registerAction',
+      'edit-profile': 'editProfile',
 
       'home': 'homeAction',
 
@@ -55,6 +57,14 @@ define([
         return navi.go('login');
       }
       homeView.render();
+    });
+
+    appRouter.on('route:editProfile', function () {
+      user = storage.getUser();
+      if (!user) {
+        return navi.go('login');
+      }
+      editProfileView.render();
     });
 
     Backbone.history.start();

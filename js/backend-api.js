@@ -15,19 +15,31 @@ define([ 'jquery' ], function ($) {
     return params;
   };
 
+  api.appendToken = appendToken;
+
+  var customAjax = function (props) {
+
+  };
+
   var ajax = function (props) {
     props.data = appendToken(props.data);
 
     var success = (typeof props.success == 'function') ? props.success : function () { console.log('success for ' + props.url); };
-    var error = (typeof props.success == 'function') ? props.error : function () { console.log('error for ' + props.url); };
+    var error = (typeof props.error == 'function') ? props.error : function (err) { console.log('error for ' + props.url + "\n" + error.message); };
 
     $.ajax({
       url: props.url,
       type: props.type || 'GET',
+      method: props.type || 'GET',
       data: props.data,
+      // crossDomain: true,
+      // dataType: 'jsonp',
+      headers: {
+        'accept': '*/*'
+      },
       success: function (data) {
         if (data.error) { 
-          error(data.error);
+          error({ message: data.error });
         }
         else {
           success(data);
@@ -113,14 +125,18 @@ define([ 'jquery' ], function ($) {
    * ]
    */
   api.updateUser = function (props) {
-    //TODO
+    ajax({
+      url: '/api/users/' + props.id,
+      type: 'PUT',
+      data: props.data || {},
+      success: props.success,
+      error: props.error
+    });
   };
 
   /**
    * GET PROFILE
    * GET “/api/users/:id”
-   * 
-   * 
    */
   api.getUser = function () {};
 

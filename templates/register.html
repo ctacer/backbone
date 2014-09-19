@@ -1,7 +1,11 @@
-<form id="register-form" class="block-panel">
+<form id="register-form" method="post" class="block-panel">
   <h2 class="block-panel-heading">Register new account</h2>
-  <input type="text" name="email" class="form-control credentials" placeholder="Email address" required="" autofocus="">
-  <input type="password" name="password" class="form-control credentials" placeholder="Password" required="">
+
+  <div class="input-group">
+    <input type="text" name="email" class="form-control credentials" placeholder="Email address" required="" autofocus="">
+    <input type="password" name="password" class="form-control credentials" placeholder="Password" required="">
+    <input type="password" name="password-again" class="form-control credentials" placeholder="Re-enter password" required="">
+  </div>
 
   <div class="input-group">
     <input type="text" name="first_name" placeholder="First Name" class="form-control credentials">
