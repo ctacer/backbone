@@ -31,12 +31,12 @@ define([
       var user = storage.getUser();
       var that = this;
 
-      messages.fetch({
+      messages.fetchUsers({
         success: function (list) {
-          var html = _.template(navBarTemplate + homeTemplate) ({ user: user, messages: list.models });
+          var html = _.template(navBarTemplate + homeTemplate) ({ user: user, messages: list });
           that.$el.html(html);
         }
-      });      
+      });
     },
 
     events: {
@@ -79,12 +79,12 @@ define([
 
   var view = new HomeView();
 
-  var renderLoginView = function () {
-    view.render();
+  var renderFunction = function () {
+    view.render.apply(view, Array.prototype.slice.call(arguments, 0));
   };
 
   return {
-    render: renderLoginView
+    render: renderFunction
   };
 
 });

@@ -1,16 +1,16 @@
 <form id="edit-profile-form" method="post" class="block-panel">
   <h2 class="block-panel-heading">Edit profile</h2>
 
-  <div class="input-group">
-    <input type="text" name="first_name" placeholder="First Name" class="form-control credentials" value="<%= user.first_name%>">
-    <input type="text" name="last_name" placeholder="Last Name" class="form-control credentials" value="<%= user.last_name%>">
-    <input type="text" name="birthday" placeholder="Birthday" class="form-control credentials" value="<%= user.birthday%>">
-    <input type="text" name="phone" placeholder="Phone" class="form-control credentials" value="<%= user.phone%>">
-    <input type="text" name="address" placeholder="Address" class="form-control credentials" value="<%= user.address%>">
-    <input type="text" name="image_url" placeholder="Image url" class="form-control credentials" value="<%= user.image_url%>">
-    <input type="text" name="twitter" placeholder="Twitter" class="form-control credentials" value="<%= user.twitter%>">
-    <input type="text" name="description" placeholder="Description" class="form-control credentials" value="<%= user.description%>">
-    <input type="text" name="status" placeholder="Status" class="form-control credentials" value="<%= user.status%>">
+  <div>
+    <div><span>First Name</span> <input type="text" name="first_name" placeholder="First Name" class="form-control credentials" value="<%= user.first_name%>"></div>
+    <div><span>Last Name</span> <input type="text" name="last_name" placeholder="Last Name" class="form-control credentials" value="<%= user.last_name%>"></div>
+    <div><span>Birthday</span> <input type="text" name="birthday" placeholder="Birthday" class="form-control credentials" value="<%= user.birthday%>"></div>
+    <div><span>Phone</span> <input type="text" name="phone" placeholder="Phone" class="form-control credentials" value="<%= user.phone%>"></div>
+    <div><span>Address</span> <input type="text" name="address" placeholder="Address" class="form-control credentials" value="<%= user.address%>"></div>
+    <div><span>Image url</span> <input type="text" name="image_url" placeholder="Image url" class="form-control credentials" value="<%= user.image_url%>"></div>
+    <div><span>Twitter</span> <input type="text" name="twitter" placeholder="Twitter" class="form-control credentials" value="<%= user.twitter%>"></div>
+    <div><span>Description</span> <input type="text" name="description" placeholder="Description" class="form-control credentials" value="<%= user.description%>"></div>
+    <div><span>Status</span> <input type="text" name="status" placeholder="Status" class="form-control credentials" value="<%= user.status%>"></div>
   </div>
 
   <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>

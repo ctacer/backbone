@@ -1,15 +1,13 @@
 
-define([ 'jquery', 'underscore', 'backbone', 'models/user' ], function ($, _, Backbone, UserModel) {
+define([ 'jquery', 'underscore', 'backbone', 'config', 'models/user' ], function ($, _, Backbone, config, UserModel) {
   
   "use strict";
 
-  var Users = Backbone.collection.extend({
-    url: '/api/users',
-    model: UserModel.User
+  var Users = Backbone.Collection.extend({
+    url: '/api/users?api_key=' + config.apiKey,
+    model: UserModel
   });
 
-  return {
-    Users: Users
-  };
+  return Users;
 
 });

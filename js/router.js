@@ -9,9 +9,11 @@ define([
   'views/login',
   'views/register',
   'views/edit-profile',
-  'views/search-profile'
+  'views/search-profile',
+  'views/user-page',
+  'views/friends'
 
-], function($, _, Backbone, storage, navi, homeView, loginView, registerView, editProfileView, searchProfileView) {
+], function($, _, Backbone, storage, navi, homeView, loginView, registerView, editProfileView, searchProfileView, userPageView, friendsView) {
 
   "use strict";
 
@@ -24,6 +26,8 @@ define([
       'edit-profile': 'editProfile',
       'search-profile': 'searchProfile',
       'home': 'homeAction',
+      'user-page/:id': 'userPageAction',
+      'friends': 'friendsAction',
 
       '*actions': 'homeAction'
     }
@@ -37,7 +41,7 @@ define([
 
     _.each({
 
-      'route:loginAction': function () {
+      'loginAction': function () {
         user = storage.getUser();
         if (user) {
           return navi.go('home');
@@ -45,7 +49,7 @@ define([
         loginView.render();
       },
 
-      'route:registerAction': function () {
+      'registerAction': function () {
         user = storage.getUser();
         if (user) {
           return navi.go('home');
@@ -53,7 +57,7 @@ define([
         registerView.render();
       },
 
-      'route:homeAction': function (actions) {
+      'homeAction': function (actions) {
         user = storage.getUser();
         if (!user) {
           return navi.go('login');
@@ -61,7 +65,7 @@ define([
         homeView.render();
       },
 
-      'route:editProfile': function () {
+      'editProfile': function () {
         user = storage.getUser();
         if (!user) {
           return navi.go('login');
@@ -69,16 +73,31 @@ define([
         editProfileView.render();
       },
 
-      'route:searchProfile': function () {
+      'searchProfile': function () {
         user = storage.getUser();
         if (!user) {
           return navi.go('login');
         }
         searchProfileView.render();
+      },
+
+      'userPageAction': function (id) {
+        if (!id) {
+          return navi.go('home');
+        }
+        userPageView.render(id);
+      },
+
+      'friendsAction': function () {
+        user = storage.getUser();
+        if (!user) {
+          return navi.go('login');
+        }
+        friendsView.render();
       }
 
     }, function (listener, key) {
-      appRouter.on(key, listener);
+      appRouter.on('route:' + key, listener);
     });
 
     Backbone.history.start();

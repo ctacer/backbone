@@ -71,12 +71,12 @@ define([
 
   var view = new LoginView();
 
-  var renderLoginView = function () {
-    view.render();
+  var renderFunction = function () {
+    view.render.apply(view, Array.prototype.slice.call(arguments, 0));
   };
 
   return {
-    render: renderLoginView
+    render: renderFunction
   };
 
 });

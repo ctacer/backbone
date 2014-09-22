@@ -1,6 +1,6 @@
 
 
-define([ 'jquery', 'underscore', 'backbone' ], function ($, _, Backbone) {
+define([ 'jquery', 'underscore', 'backbone', 'config' ], function ($, _, Backbone, config) {
   
   "use strict";
 

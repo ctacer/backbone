@@ -1,10 +1,31 @@
 <div class="container fluid-container">
-  <input type="text" id="search-text">
-  <select id="search-field">
-    <option value="first_name">First Name</option>
-    <option value="last_name">Last Name</option>
-    <option value="twitter">Twitter</option>
-    <option value="gender">Gender</option>
-    <option value="age">Age</option>
-  </select>
+  <div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+      <div class="input-group">
+        <div id="drop-down-select-search-field" class="dropdown input-group-btn" data-value="first_name">
+          <button  id="drop-down-search-field" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Sort By : 
+            <span class="value-holder">'First Name'</span>
+
+            <span class="caret"></span>
+          </button>        
+
+          <ul class="dropdown-menu" role="menu" aria-labelledby="drop-down-search-field">
+            <li role="presentation"><option value="first_name">First Name</option></li>
+            <li role="presentation"><option value="last_name">Last Name</option></li>
+            <li role="presentation"><option value="twitter">Twitter</option></li>
+            <li role="presentation"><option value="gender">Gender</option></li>
+            <li role="presentation"><option value="age">Age</option></li>
+          </ul>
+        </div>
+        <input  id="search-text" type="text" class="form-control">
+        <span class="input-group-btn">
+          <button id="submit-search" class="btn btn-default" type="button">Submit</button>
+        </span>        
+      </div>
+    </div>
+  </div>
+
+  <div id="result"></div>
 </div>

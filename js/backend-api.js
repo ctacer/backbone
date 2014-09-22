@@ -1,10 +1,10 @@
 
-define([ 'jquery' ], function ($) {
+define([ 'jquery', 'config' ], function ($, config) {
   
   "use strict";
 
   var api = {};
-  var accessToken = '3fce90e822fc89288eda1b59079a53963a659263';
+  var accessToken = config.apiKey;
 
   /**
    * function appends access token to every request object
@@ -28,8 +28,6 @@ define([ 'jquery' ], function ($) {
       type: props.type || 'GET',
       method: props.type || 'GET',
       data: props.data,
-      // crossDomain: true,
-      // dataType: 'jsonp',
       headers: {
         'accept': '*/*'
       },
@@ -187,7 +185,15 @@ define([ 'jquery' ], function ($) {
    * POST   /api/add_friend
    * 
    */
-  api.addFriend = function () {};
+  api.addFriend = function (props) {
+    ajax({
+      url: '/api/add_friend',
+      type: 'POST',
+      data: props.data,
+      success: props.success,
+      error: props.error
+    });
+  };
 
   /**
    * DELETE FRIEND

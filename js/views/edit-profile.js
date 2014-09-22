@@ -59,6 +59,7 @@ define([
         id: user.id,
         success: function (data) {
           storage.setUser(data);
+          navi.go('home');
         }
       });
 
@@ -68,12 +69,12 @@ define([
 
   var view = new EditProfileView();
 
-  var renderEditProfileView = function () {
-    view.render();
+  var renderFunction = function () {
+    view.render.apply(view, Array.prototype.slice.call(arguments, 0));
   };
 
   return {
-    render: renderEditProfileView
+    render: renderFunction
   };
 
 });
