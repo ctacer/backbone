@@ -8,7 +8,7 @@
             <% _.each(result, function (user) { %>
               <div class="row result-row">
                 <div class="col-md-8 result-title">
-                  <a href="#/user-page/<%= user['id'] %>"><%= user['first_name'] + ' ' + user['last_name'] %></a>
+                  <a href="#/user-page/<%= user['id'] %>"><%= user.get('first_name') + ' ' + user.get('last_name') %></a>
                 </div>
                 <div class="col-md-4">
                   <button type="button" data-ref="<%= user['id'] %>" class="add-to-friends-btn btn btn-primary">Add to Friends</button>

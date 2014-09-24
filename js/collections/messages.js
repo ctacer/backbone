@@ -35,9 +35,6 @@ define([ 'jquery', 'underscore', 'backbone', 'config', 'models/message', 'collec
           });
         }
       });
-      if (props && props.success) {
-
-      }
     }
   });
 

@@ -6,11 +6,12 @@ define([
   'backend-api',
   'storage',
   'navi',
+  'collections/unknown-users',
   'text!templates/nav-bar.html',
   'text!templates/search-profile.html',
   'text!templates/result-search-profile.html'
 
-], function ($, _, Backbone, backendApi, storage, navi, navBarTemplate, searchProfileTemplate, resultSearchProfileTemplate) {
+], function ($, _, Backbone, backendApi, storage, navi, UnknownUsersCollection, navBarTemplate, searchProfileTemplate, resultSearchProfileTemplate) {
 
   var EditProfileView = Backbone.View.extend({
     el: '#view',
@@ -33,8 +34,15 @@ define([
 
     addToFriends: function (event) {
       var ref = $(event.currentTarget).attr("data-ref");
-      console.log({
+      var data = {
         user_id: ref
+      };
+
+      backendApi.addFriend({
+        data: data,
+        success: function () {
+          navi.go('home');
+        }
       });
     },
 
@@ -52,8 +60,11 @@ define([
       var data = {};      
       data[searchField] = searchText;
 
-      backendApi.searchUsers({
-        data: data,
+
+      var unknownUsersCollection = new UnknownUsersCollection();
+
+      unknownUsersCollection.fetchUsers({
+        data: $.param(data),
         success: function (users) {
           that.renderResult(users);
         }
