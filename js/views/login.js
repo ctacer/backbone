@@ -34,6 +34,12 @@ define([
             navi.go('home');
           }
           else {}
+        },
+        error: function () {
+          $(event.target).find('input[type="password"]').val('');
+          $(event.target).find('input[type="text"]')
+            .val('')
+            .focus();
         }
       });
       return false;
