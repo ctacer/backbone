@@ -230,6 +230,16 @@ define([ 'jquery', 'config' ], function ($, config) {
     });
   };
 
+  api.getTwits= function (props) {
+    ajax({
+      url: '/backbone/server/twits.php/',
+      type: 'GET',
+      data: props.data || {},
+      success: props.success,
+      error: props.error
+    });
+  };
+
   /**
    * SEARCH MESSAGES 
    * GET /api/wall_posts/search
