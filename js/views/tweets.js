@@ -6,11 +6,12 @@ define([
   'backend-api',
   'storage',
   'navi',
+  'utils',
   'collections/tweets',
   'text!templates/nav-bar.html',
   'text!templates/tweets.html'
 
-], function ($, _, Backbone, backendApi, storage, navi, TweetsCollection, navBarTemplate, tweetsTemplate) {
+], function ($, _, Backbone, backendApi, storage, navi, utils, TweetsCollection, navBarTemplate, tweetsTemplate) {
 
   var TweetsView = Backbone.View.extend({
     el: '#view',
@@ -59,38 +60,21 @@ define([
       'click #next-tweets-page': "next"
     },
 
-    prev: function (event) {
-      event.preventDefault();
-      if ($(event.currentTarget).hasClass('disabled')) {
-        return;
-      }
-      
+    prev: utils.pagination(function () {
       this.tweets.getPreviousPage();
       this.reRender();
-    },
+    }),
 
-    next: function (event) {
-      event.preventDefault();
-      if ($(event.currentTarget).hasClass('disabled')) {
-        return;
-      }
-      
+    next: utils.pagination(function () {
       this.tweets.getNextPage();
       this.reRender();
-    },
+    }),
 
     checkPagination: function () {
-      if (this.tweets.hasNextPage()) {
-        this.$el.find("#next-tweets-page").removeClass("disabled")
-      } else {
-        this.$el.find("#next-tweets-page").addClass("disabled")
-      }
-
-      if (this.tweets.hasPreviousPage()) {
-        this.$el.find("#prev-tweets-page").removeClass("disabled")
-      } else {
-        this.$el.find("#prev-tweets-page").addClass("disabled")
-      }
+      utils.checkPagination.apply(this, ['tweets', {
+        next: "#next-tweets-page",
+        prev: '#prev-tweets-page'
+      }]);
     }
   });
 

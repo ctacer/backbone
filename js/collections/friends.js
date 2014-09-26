@@ -3,9 +3,18 @@ define([ 'jquery', 'underscore', 'backbone', 'config', 'models/user' ], function
   
   "use strict";
 
-  var Friends = Backbone.Collection.extend({
+  var Friends = Backbone.PageableCollection.extend({
+    model: UserModel,
+
     url: '/api/friends?api_key=' + config.apiKey,
-    model: UserModel
+
+    mode: 'client',
+    
+    state: {
+      firstPage: 1,
+      currentPage: 1,
+      pageSize: config.friendsPerPage
+    }
   });
 
   return Friends;
