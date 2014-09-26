@@ -12,9 +12,9 @@ define([
   'views/search-profile',
   'views/user-page',
   'views/friends',
-  'views/twits'
+  'views/tweets'
 
-], function($, _, Backbone, storage, navi, homeView, loginView, registerView, editProfileView, searchProfileView, userPageView, friendsView, twitsView) {
+], function($, _, Backbone, storage, navi, homeView, loginView, registerView, editProfileView, searchProfileView, userPageView, friendsView, tweetsView) {
 
   "use strict";
 
@@ -29,7 +29,7 @@ define([
       'home': 'homeAction',
       'user-page/:id': 'userPageAction',
       'friends': 'friendsAction',
-      'twits': 'twitsAction',
+      'tweets': 'tweetsAction',
 
       '*actions': 'homeAction'
     }
@@ -98,12 +98,12 @@ define([
         friendsView.render();
       },
 
-      'twitsAction': function () {
+      'tweetsAction': function () {
         user = storage.getUser();
         if (!user) {
           return navi.go('login');
         }
-        twitsView.render();
+        tweetsView.render();
       }
 
     }, function (listener, key) {

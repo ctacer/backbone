@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <% if (tweets && tweets.length) { %>
+      <div class="panel panel-default">
+        <div class="panel-heading">Tweets</div>
+        <div class="panel-body">
+          <div class="container-fluid">
+            <% _.each(tweets, function (tweet) { %>
+              <div class="row result-row">
+                <div class="col-md-12">
+                  <div class="twitter-header"><a href="https://twitter.com/<%= tweet.get('user').screen_name %>"><%= tweet.get('user').name %></a></div>
+                  <div class="twitter-content"><%= tweet.get('text') %></div>
+                  <div class="twitter-footer">Created: <%= tweet.get('created_at') %></div>
+                </div>                
+              </div>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+    <% }; %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <ul class="right-orientated-row pagination">
+      <li id="prev-tweets-page"><a href="#">&laquo;</a></li>
+      <li id="next-tweets-page"><a href="#">&raquo;</a></li>
+    </ul>
+    <div class="clear"></div>
+  </div>  
+</div>

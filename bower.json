@@ -8,6 +8,7 @@
     "underscore": "~1.7.0",
     "backbone": "~1.1.2",
     "requirejs": "~2.1.15",
-    "requirejs-text": "~2.0.12"
+    "requirejs-text": "~2.0.12",
+    "backbone.paginator": "~2.0.2"
   }
 }
