@@ -77,13 +77,15 @@
             </div>
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-body chat-body">          
-            <% _.each(messages, function (message, key) { %>
-              <span class="message"><span class="user" style="color: #0A6"><%= message.get('sender') %></span>: <%= message.get('description') %></span>
-            <% }); %>
+        <% if (messages && messages.length) { %>
+          <div class="panel panel-default">
+            <div class="panel-body chat-body">          
+              <% _.each(messages, function (message, key) { %>
+                <span class="message"><span class="user" style="color: #0A6"><%= message.get('sender') %></span>: <%= message.get('description') %></span>
+              <% }); %>
+            </div>
           </div>
-        </div>
+        <% }; %>
       </div>
     </div>
   </div>

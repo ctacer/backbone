@@ -20,17 +20,34 @@ define([ 'jquery', 'underscore', 'backbone', 'config', 'models/message', 'collec
     return messages;
   };
 
-  var Messages = Backbone.Collection.extend({
+  var Messages = Backbone.PageableCollection.extend({
     url: '/api/wall_posts?api_key=' + config.apiKey,
     model: MessageModel,
 
+    mode: 'client',
+    
+    state: {
+      firstPage: 1,
+      currentPage: 1,
+      pageSize: config.wallMessages
+    },
+
+    getMessages: function () {
+      return buildMessageList(this.messages.models, this.users.models);
+    },
+
     fetchUsers: function (props) {
+      var that = this;
+
       this.fetch({
         success: function (messages) {
+          that.messages = messages;
+
           var userCollection = new UserCollection();
           userCollection.fetch({
             success: function (users) {
-              props && props.success && props.success(buildMessageList(messages.models, users.models));
+              that.users = users;
+              props && props.success && props.success(that.getMessages());
             }
           });
         }

@@ -1,0 +1,18 @@
+<% if (messages && messages.length) { %>
+  <div class="panel panel-default">
+    <div class="panel-body chat-body">          
+      <% _.each(messages, function (message, key) { %>
+        <span class="message"><span class="user" style="color: #0A6"><%= message.get('sender') %></span>: <%= message.get('description') %></span>
+      <% }); %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="right-orientated-row pagination">
+        <li id="prev-message-page"><a href="#">&laquo;</a></li>
+        <li id="next-message-page"><a href="#">&raquo;</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>  
+  </div>
+<% }; %>

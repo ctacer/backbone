@@ -18,9 +18,7 @@ require.config({
     "backbone": {
       deps: ["jquery", "underscore"]
     },
-    'paginator': {
-      deps: ["backbone"]
-    },
+    "paginator": ["backbone"]
   }
 });
 

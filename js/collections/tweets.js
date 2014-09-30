@@ -1,5 +1,5 @@
 
-define([ 'jquery', 'underscore', 'backbone', 'config', 'models/tweet' ], function ($, _, Backbone, config, TweetModel) {
+define([ 'jquery', 'underscore', 'backbone', 'config', 'models/tweet', 'paginator' ], function ($, _, Backbone, config, TweetModel) {
 
   "use strict";
 

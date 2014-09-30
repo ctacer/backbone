@@ -6,14 +6,14 @@ define([
   'storage',
   'backend-api',
   'navi',
+  'utils',
   'collections/messages',
   'models/message',
   'text!templates/nav-bar.html',
-  'text!templates/home.html'
+  'text!templates/home.html',
+  'text!templates/messages.html'
 
-], function ($, _, Backbone, storage, backendApi, navi, MessageCollection, MessageModel, navBarTemplate, homeTemplate) {
-
-  var messages = new MessageCollection();
+], function ($, _, Backbone, storage, backendApi, navi, utils, MessageCollection, MessageModel, navBarTemplate, homeTemplate, messagesTemplate) {
 
   var getUserInfo = function (user) {
     var list = [];
@@ -26,22 +26,49 @@ define([
 
   var HomeView = Backbone.View.extend({
     el: '#view',
+    messageEl: '#messages-container',
+
+    reRender: function () {
+      this.$el.find(this.messageEl).html( _.template(messagesTemplate) ({ messages: this.messages.getMessages() }) );
+      this.checkPagination();
+    },
 
     render: function () {
       var user = storage.getUser();
       var that = this;
 
-      messages.fetchUsers({
-        success: function (list) {
-          var html = _.template(navBarTemplate + homeTemplate) ({ user: user, messages: list });
+      this.messages = new MessageCollection();
+      this.messages.fetchUsers({
+        success: function () {
+          var html = _.template(navBarTemplate + homeTemplate) ({ user: user });
           that.$el.html(html);
+          that.reRender();
         }
       });
     },
 
     events: {
       'click #log-out-button': 'logOut',
-      'click #message-send': 'sendMessage'
+      'click #message-send': 'sendMessage',
+      'click #prev-message-page': "prev",
+      'click #next-message-page': "next"
+    },
+
+    prev: utils.pagination(function () {
+      this.messages.getPreviousPage();
+      this.reRender();
+    }),
+
+    next: utils.pagination(function () {
+      this.messages.getNextPage();
+      this.reRender();
+    }),
+
+    checkPagination: function () {
+      utils.checkPagination.apply(this, ['messages', {
+        next: "#next-message-page",
+        prev: '#prev-message-page'
+      }]);
     },
 
     sendMessage: function (event) {

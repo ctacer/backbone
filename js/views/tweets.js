@@ -7,11 +7,12 @@ define([
   'storage',
   'navi',
   'utils',
+  'config',
   'collections/tweets',
   'text!templates/nav-bar.html',
   'text!templates/tweets.html'
 
-], function ($, _, Backbone, backendApi, storage, navi, utils, TweetsCollection, navBarTemplate, tweetsTemplate) {
+], function ($, _, Backbone, backendApi, storage, navi, utils, config, TweetsCollection, navBarTemplate, tweetsTemplate) {
 
   var TweetsView = Backbone.View.extend({
     el: '#view',
@@ -27,7 +28,7 @@ define([
       tweetsCollection.fetch({
         data: {
           username: this.user.twitter,
-          count: 20
+          count: config.tweetsToLoad
         },
         success: function (tweets) {
           that.tweets = tweets;

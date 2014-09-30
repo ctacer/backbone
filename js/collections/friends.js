@@ -1,5 +1,5 @@
 
-define([ 'jquery', 'underscore', 'backbone', 'config', 'models/user' ], function ($, _, Backbone, config, UserModel) {
+define([ 'jquery', 'underscore', 'backbone', 'config', 'models/user', 'paginator' ], function ($, _, Backbone, config, UserModel) {
   
   "use strict";
 
